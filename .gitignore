@@ -1,0 +1,19 @@
+# зависимости
+node_modules/
+
+# сборка Next.js
+.next/
+out/
+
+# Prisma
+prisma/dev.db
+prisma/*.db-journal
+
+# среды
+.env
+.env.local
+
+# логи
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
