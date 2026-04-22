@@ -1,8 +1,11 @@
+// next.config.mjs
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  // если были другие настройки, оставь их:
-  // ...твои_другие_поля
-}
+  // УБРАЛИ output: 'export'
+  // Здесь можно оставить другие настройки, если они у тебя были.
+  // Например:
+  // reactStrictMode: true,
+};
 
-export default nextConfig
+export default nextConfig;
