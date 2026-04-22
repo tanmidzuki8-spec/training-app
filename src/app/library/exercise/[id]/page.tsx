@@ -1,7 +1,11 @@
+// app/library/exercise/[id]/page.tsx
+
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
+// ВАЖНО: говорим Next, что страница всегда динамическая
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 type PageProps = {
   params: { id: string };
@@ -11,18 +15,26 @@ export default async function ExercisePage({ params }: PageProps) {
   const exerciseId = Number(params.id);
 
   try {
+    // 1. Загружаем упражнение
     const exercise = await prisma.exercise.findUnique({
       where: { id: exerciseId },
     });
 
     if (!exercise) {
       return (
-        <div className="max-w-4xl mx-auto">
-          <p className="text-sm text-slate-500">Упражнение не найдено.</p>
+        <div className="max-w-4xl mx-auto p-6">
+          <Link
+            href="/library"
+            className="text-xs text-sky-600 hover:text-sky-500"
+          >
+            ← Назад в библиотеку
+          </Link>
+          <p className="mt-4 text-sm text-slate-500">Упражнение не найдено.</p>
         </div>
       );
     }
 
+    // 2. Загружаем тренировки/планы, где используется это упражнение
     const workouts = await prisma.workout.findMany({
       where: {
         exercises: {
@@ -35,6 +47,7 @@ export default async function ExercisePage({ params }: PageProps) {
       orderBy: { id: "asc" },
     });
 
+    // 3. Основной рендер
     return (
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="rounded-3xl bg-white border border-slate-200 px-6 md:px-10 py-8 md:py-10 shadow-[0_20px_60px_rgba(15,23,42,0.12)] space-y-4">
@@ -93,7 +106,7 @@ export default async function ExercisePage({ params }: PageProps) {
                         <span className="font-medium text-slate-700">
                           {w.plan.title}
                         </span>{" "}
-                          (цель: {w.plan.goal}, уровень: {w.plan.level})
+                        (цель: {w.plan.goal}, уровень: {w.plan.level})
                       </p>
                     )}
                   </div>
@@ -113,6 +126,7 @@ export default async function ExercisePage({ params }: PageProps) {
   } catch (error) {
     console.error("Error loading exercise page:", error);
 
+    // 4. Страница при ошибке (но без падения билда)
     return (
       <div className="max-w-4xl mx-auto p-6">
         <Link
