@@ -1,13 +1,12 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/progress/page": "app/progress/page.js",
   "/profile/page": "app/profile/page.js",
   "/questionnaire/health/page": "app/questionnaire/health/page.js",
   "/questionnaire/page": "app/questionnaire/page.js",
-  "/login/page": "app/login/page.js",
-  "/progress/page": "app/progress/page.js",
   "/register/page": "app/register/page.js",
-  "/page": "app/page.js",
-  "/library/exercise/page": "app/library/exercise/page.js",
   "/library/exercise/[id]/page": "app/library/exercise/[id]/page.js",
   "/plan/page": "app/plan/page.js",
   "/library/page": "app/library/page.js"

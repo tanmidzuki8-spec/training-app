@@ -93,7 +93,7 @@ export default async function ExercisePage({ params }: PageProps) {
                         <span className="font-medium text-slate-700">
                           {w.plan.title}
                         </span>{" "}
-                        (цель: {w.plan.goal}, уровень: {w.plan.level})
+                          (цель: {w.plan.goal}, уровень: {w.plan.level})
                       </p>
                     )}
                   </div>
